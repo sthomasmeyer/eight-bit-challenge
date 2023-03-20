@@ -1,0 +1,27 @@
+.PointsDisplay {
+  font-family: 'Rubik', sans-serif;
+  border: 5px double #98c1d9;
+  border-radius: 25px;
+  height: 95%;
+  width: 95%;
+  display: flex;
+  align-items: center;
+}
+
+.PointsDisplay .Points {
+  font-size: 2rem;
+  color: #171717;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .PointsDisplay {
+    border: 2.5px double #98c1d9;
+    height: 75%;
+    width: 85%;
+  }
+
+  .PointsDisplay .Points {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,24 @@
+.Victory {
+  border: 5px ridge #171717;
+  background-color: ghostwhite;
+  font-family: 'Rubik', sans-serif;
+  height: 100vh;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.Victory-title {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Victory-title h1 {
+  font-size: 3em;
+  font-variant: small-caps;
+  color: #171717;
+}
+
+.Victory-message {
+  text-align: center;
+}

@@ -1,0 +1,67 @@
+.PointsAndTimerRow {
+  height: 12.5%;
+  width: 97.5%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  display: grid;
+  grid-template-areas: 'points logo timer';
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.PointsDisplay-container {
+  grid-area: points;
+  justify-self: left;
+  display: flex;
+  align-items: center;
+  height: 95%;
+  max-height: 80px;
+  width: 75%;
+  max-width: 160px;
+}
+
+.Logo-container {
+  grid-area: logo;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95%;
+  max-height: 100px;
+}
+
+.Logo-container img {
+  height: 100%;
+  max-width: 100%;
+}
+
+.Timer-container {
+  grid-area: timer;
+  justify-self: right;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  height: 95%;
+  max-height: 80px;
+  width: 75%;
+  max-width: 160px;
+}
+
+@media only screen and (max-width: 500px) {
+  .PointsDisplay-container {
+    height: 75%;
+    width: 85%;
+  }
+
+  .Logo-container {
+    height: 75%;
+    width: 95%;
+  }
+
+  .Timer-container {
+    height: 75%;
+    width: 85%;
+  }
+}

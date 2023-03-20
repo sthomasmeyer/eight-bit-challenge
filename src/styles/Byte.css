@@ -1,0 +1,18 @@
+.Byte {
+  width: 97.5%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.Byte-wrapper {
+  height: 75%;
+  padding-left: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.Bit-wrapper {
+  border: 2.5px solid #171717;
+  border-radius: 1px;
+  width: 10%;
+}

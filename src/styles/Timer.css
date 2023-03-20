@@ -1,0 +1,30 @@
+.Timer {
+  border: 5px double #171717;
+  border-radius: 25px;
+  height: 95%;
+  width: 95%;
+  max-height: 80vh;
+  max-width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Rubik', sans-serif;
+  margin-left: auto;
+}
+
+.Timer time {
+  font-size: 4rem;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .Timer {
+    border: 2.5px double #171717;
+    height: 75%;
+    width: 85%;
+  }
+
+  .Timer time {
+    font-size: 1.75rem;
+  }
+}

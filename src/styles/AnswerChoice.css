@@ -1,0 +1,47 @@
+.AnswerChoice {
+  font-family: 'Rubik', sans-serif;
+}
+
+.AnswerChoice:hover {
+  outline: 2.5px solid #171717;
+  cursor: pointer;
+  box-shadow: -2.5px 2.5px 10px #171717;
+}
+
+.AnswerChoice-decimalValue-wrapper {
+  text-align: center;
+  color: ghostwhite;
+  background-color: #171717;
+  font-size: 2.5vw;
+  padding: 5px;
+  margin-bottom: 2.5px;
+}
+
+.AnswerChoice-button-wrapper {
+  height: 31vh;
+}
+
+.AnswerChoice-button-wrapper img {
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .AnswerChoice:hover {
+    outline: 1px solid #171717;
+    box-shadow: -1px 1px 5px #171717;
+  }
+
+  .AnswerChoice-decimalValue-wrapper {
+    margin-bottom: 1.5px;
+  }
+
+  .AnswerChoice-button-wrapper {
+    height: 22vh;
+  }
+
+  .AnswerChoice-button-wrapper img {
+    height: 100%;
+    width: 100%;
+  }
+}
