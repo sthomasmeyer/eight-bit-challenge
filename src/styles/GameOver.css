@@ -9,7 +9,6 @@
 }
 
 .GameOver-title {
-  margin: 0 auto;
   text-align: center;
 }
 
@@ -48,6 +47,23 @@
 .GameOver-message {
   text-align: center;
   margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.GameOver-score-summary {
+  border: 4px inset #171717;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.GameOver-score-summary h3 {
+  color: #98c1d9;
+  font-variant: small-caps;
+  padding-left: 2.5%;
+}
+
+.GameOver-score-summary h3:last-of-type {
+  color: #171717;
 }
 
 @media only screen and (max-width: 500px) {
@@ -61,5 +77,9 @@
 
   .GameOver-message {
     font-size: 0.8rem;
+  }
+
+  .GameOver-score-summary h3 {
+    font-size: 1rem;
   }
 }

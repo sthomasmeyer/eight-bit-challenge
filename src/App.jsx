@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PointsAndTimerRow from './components/PointsAndTimerRow';
 import Byte from './components/Byte';
@@ -41,6 +41,10 @@ function App() {
   // The `useNavigate` hook returns a function that lets you navigate programmatically.
   const navigate = useNavigate();
 
+  useEffect(() => {
+    localStorage.setItem('eight-bit-challenge-current-points-tracker', 0);
+  }, []);
+
   const handleAnswerSelection = (selectedAnswer) => {
     if (selectedAnswer === selectionOrder[currentRound]) {
       // Increment the current round.
@@ -49,6 +53,11 @@ function App() {
         return navigate('/victory');
       }
       setCurrentRound(nextRound);
+      // Update the current-points tracker in local storage.
+      localStorage.setItem(
+        'eight-bit-challenge-current-points-tracker',
+        nextRound
+      );
       // Update the 8-bit sequence.
       setEightBitSequence(eightBitMegaList[selectionOrder[nextRound]]);
       setIncorrectAnswers(
