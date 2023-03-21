@@ -8,7 +8,7 @@ The 8-bit Challenge is an educational game that gives players an opportunity to 
 
 ## Version 1.0
 
-[eight-bit-challenge.pages.dev]('eight-bit-challenge.pages.dev')
+[eight-bit-challenge.pages.dev]('https://eight-bit-challenge.pages.dev')
 
 ## Features
 
