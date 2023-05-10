@@ -71,10 +71,8 @@ function App() {
         setSeconds(24);
       } else if (nextRound < 24) {
         setSeconds(16);
-      } else if (nextRound < 64) {
-        setSeconds(8);
       } else {
-        setSeconds(4);
+        setSeconds(8);
       }
     } else {
       // If the user selects the wrong answer choice, the game is over.
