@@ -56,7 +56,7 @@ const GameOver = () => {
             Final Score:{' '}
             {localStorage.getItem('eight-bit-challenge-current-points-tracker')}
           </h3>
-          <h3>Session-high Score: {highScore}</h3>
+          <h3>Local High Score: {highScore}</h3>
         </div>
       ) : null}
     </div>
