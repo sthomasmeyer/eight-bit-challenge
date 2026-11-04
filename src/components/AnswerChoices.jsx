@@ -14,7 +14,7 @@ const AnswerChoices = ({
   incorrectAnswerTwo,
   handleAnswerSelection
 }) => {
-  // Keep render pure; only reshuffle when the round's answer set changes.
+  // Shuffle once per round so re-renders don't reorder the paths.
   const shuffledChoices = useMemo(() => {
     const shuffledValues = shuffleArray([
       correctAnswer,
