@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PropType from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Timer.css';
-import { Navigate } from 'react-router-dom';
 
 /**
  * This component is a countdown timer that takes in a number of seconds as a prop and updates...
@@ -42,11 +40,6 @@ const Timer = ({ seconds, points }) => {
       <time>{secondsRemaining}</time>
     </div>
   );
-};
-
-Timer.propTypes = {
-  seconds: PropType.number.isRequired,
-  points: PropType.number.isRequired
 };
 
 export default Timer;
