@@ -1,18 +1,23 @@
 import React from 'react';
 import '../styles/AnswerChoice.css';
 
-const AnswerChoice = ({ decimalValue, image, handleAnswerSelection }) => {
+const AnswerChoice = ({ index, decimalValue, handleAnswerSelection }) => {
   const handleClick = () => {
     handleAnswerSelection(decimalValue);
   };
 
   return (
-    <div className='AnswerChoice' onClick={handleClick}>
-      <div className='AnswerChoice-decimalValue-wrapper'>{decimalValue}</div>
-      <div className='AnswerChoice-button-wrapper'>
-        <img src={image} alt='' />
-      </div>
-    </div>
+    <button
+      type='button'
+      className='AnswerChoice'
+      onClick={handleClick}
+      aria-label={`Select decimal value ${decimalValue}`}
+    >
+      <span className='AnswerChoice-index' aria-hidden='true'>
+        0{index}
+      </span>
+      <span className='AnswerChoice-decimalValue'>{decimalValue}</span>
+    </button>
   );
 };
 

@@ -1,11 +1,14 @@
 .Victory {
-  border: 5px ridge #171717;
-  background-color: ghostwhite;
-  font-family: 'Rubik', sans-serif;
-  height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--fg-primary);
+  min-height: 100dvh;
   width: 100%;
-  max-width: 800px;
+  max-width: 820px;
   margin: 0 auto;
+  padding: 24px 16px 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Victory-title {
@@ -14,11 +17,22 @@
 }
 
 .Victory-title h1 {
-  font-size: 3em;
-  font-variant: small-caps;
-  color: #171717;
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--weight-semibold);
+  font-variation-settings: 'wght' var(--weight-semibold);
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+  color: var(--fg-primary);
 }
 
 .Victory-message {
   text-align: center;
+  font-family: var(--font-sans);
+  color: var(--fg-muted);
+  font-size: 1.05rem;
+  line-height: 1.62;
+  max-width: 60ch;
+  margin: 12px auto 0;
 }

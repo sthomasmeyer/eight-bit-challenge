@@ -1,15 +1,12 @@
 .PointsAndTimerRow {
-  height: 12.5%;
-  width: 97.5%;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 5px;
+  width: 100%;
+  max-width: 720px;
+  margin: 4px auto 12px;
+  padding: 4px 0;
   display: grid;
   grid-template-areas: 'points logo timer';
   align-items: center;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .PointsDisplay-container {
@@ -17,10 +14,9 @@
   justify-self: left;
   display: flex;
   align-items: center;
-  height: 95%;
-  max-height: 80px;
-  width: 75%;
-  max-width: 160px;
+  height: 64px;
+  width: 100%;
+  max-width: 164px;
 }
 
 .Logo-container {
@@ -28,13 +24,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95%;
-  max-height: 100px;
+  height: 76px;
 }
 
 .Logo-container img {
   height: 100%;
   max-width: 100%;
+  filter: var(--logo-filter);
+  transition: filter 0.35s var(--spring-ease);
 }
 
 .Timer-container {
@@ -43,25 +40,19 @@
   display: flex;
   align-items: center;
   text-align: right;
-  height: 95%;
-  max-height: 80px;
-  width: 75%;
-  max-width: 160px;
+  height: 64px;
+  width: 100%;
+  max-width: 164px;
 }
 
 @media only screen and (max-width: 500px) {
-  .PointsDisplay-container {
-    height: 75%;
-    width: 85%;
+  .PointsDisplay-container,
+  .Timer-container {
+    height: 52px;
+    width: 92%;
   }
 
   .Logo-container {
-    height: 75%;
-    width: 95%;
-  }
-
-  .Timer-container {
-    height: 75%;
-    width: 85%;
+    height: 60px;
   }
 }

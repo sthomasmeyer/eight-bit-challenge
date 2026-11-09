@@ -1,18 +1,50 @@
 .Byte {
-  width: 97.5%;
+  width: 100%;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 14px;
 }
 
 .Byte-wrapper {
-  height: 75%;
-  padding-left: 10%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
   align-items: center;
 }
 
 .Bit-wrapper {
-  border: 2.5px solid #171717;
-  border-radius: 1px;
-  width: 10%;
+  width: 100%;
+  aspect-ratio: 1 / 0.88;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-recessed);
+  transition:
+    background-color 0.25s var(--spring-ease),
+    border-color 0.25s var(--spring-ease),
+    box-shadow 0.25s var(--spring-ease),
+    transform 0.25s var(--spring-ease);
+}
+
+/* Active "1" bits feel like elevated physical keycaps; "0" bits sit recessed */
+.Bit-wrapper[data-bit='1'] {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-1px);
+}
+
+.Bit-wrapper[data-bit='0'] .Bit {
+  color: var(--fg-muted);
+}
+
+@media only screen and (max-width: 500px) {
+  .Byte-wrapper {
+    gap: 5px;
+  }
+
+  .Bit-wrapper {
+    border-radius: 8px;
+  }
 }

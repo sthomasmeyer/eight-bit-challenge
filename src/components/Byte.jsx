@@ -7,7 +7,12 @@ const Byte = ({ binarySequence }) => {
 
   for (let i = 0; i < binarySequence.length; i++) {
     bits.unshift(
-      <div className='Bit-wrapper' key={`bit${i}`} id={`bit${i}`}>
+      <div
+        className='Bit-wrapper'
+        data-bit={binarySequence[i]}
+        key={`bit${i}`}
+        id={`bit${i}`}
+      >
         <Bit value={binarySequence[i]} />
       </div>
     );

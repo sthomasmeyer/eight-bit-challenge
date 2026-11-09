@@ -1,47 +1,91 @@
 .AnswerChoice {
-  font-family: 'Rubik', sans-serif;
+  position: relative;
+  width: 100%;
+  min-height: clamp(128px, 20vh, 176px);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-sans);
+  transition:
+    transform 0.28s var(--spring-ease),
+    box-shadow 0.28s var(--spring-ease),
+    border-color 0.22s ease,
+    background-color 0.3s var(--spring-ease),
+    color 0.3s var(--spring-ease);
 }
 
 .AnswerChoice:hover {
-  outline: 2.5px solid #171717;
-  cursor: pointer;
-  box-shadow: -2.5px 2.5px 10px #171717;
+  border-color: var(--border-highlight);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
 }
 
-.AnswerChoice-decimalValue-wrapper {
-  text-align: center;
-  color: ghostwhite;
-  background-color: #171717;
-  font-size: 2.5vw;
-  padding: 5px;
-  margin-bottom: 2.5px;
+.AnswerChoice:active {
+  transform: translateY(-1px) scale(0.985);
 }
 
-.AnswerChoice-button-wrapper {
-  height: 31vh;
+.AnswerChoice:focus-visible {
+  outline: 2px solid var(--fg-primary);
+  outline-offset: 3px;
 }
 
-.AnswerChoice-button-wrapper img {
-  height: 100%;
-  width: 100%;
+/* Micro UI Instrument Index (01 / 02 / 03): Open tracking for 11px clarity */
+.AnswerChoice-index {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: var(--weight-medium);
+  font-variation-settings: 'wght' var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--badge-fg);
+  font-variant-numeric: tabular-nums slashed-zero;
+  opacity: 0.58;
+  transition: opacity 0.2s ease;
+}
+
+.AnswerChoice:hover .AnswerChoice-index {
+  opacity: 0.92;
+}
+
+/* Display Numeral: Tight tracking, tight leading, zero horizontal jitter */
+.AnswerChoice-decimalValue {
+  font-family: var(--font-sans);
+  font-size: clamp(2.15rem, 4.5vw, 3.25rem);
+  font-weight: var(--weight-semibold);
+  font-variation-settings: 'wght' var(--weight-semibold);
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  font-variant-numeric: tabular-nums;
+  font-optical-sizing: auto;
+  color: inherit;
 }
 
 @media only screen and (max-width: 500px) {
-  .AnswerChoice:hover {
-    outline: 1px solid #171717;
-    box-shadow: -1px 1px 5px #171717;
+  .AnswerChoice {
+    min-height: 108px;
+    padding: 16px 10px;
+    border-radius: 12px;
   }
 
-  .AnswerChoice-decimalValue-wrapper {
-    margin-bottom: 1.5px;
+  .AnswerChoice-index {
+    top: 8px;
+    left: 10px;
+    font-size: 0.62rem;
   }
 
-  .AnswerChoice-button-wrapper {
-    height: 22vh;
-  }
-
-  .AnswerChoice-button-wrapper img {
-    height: 100%;
-    width: 100%;
+  .AnswerChoice-decimalValue {
+    font-size: clamp(1.65rem, 6vw, 2.2rem);
   }
 }

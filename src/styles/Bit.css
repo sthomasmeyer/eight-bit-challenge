@@ -1,14 +1,15 @@
 .Bit {
-  font-family: 'Rubik', sans-serif;
-  font-size: 2.15rem;
-  color: #171717;
+  font-family: var(--font-mono);
+  font-size: clamp(1.35rem, 2.6vw, 1.95rem);
+  font-weight: var(--weight-semibold);
+  font-variation-settings: 'wght' var(--weight-semibold);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums slashed-zero;
+  color: var(--fg-primary);
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-}
-
-@media only screen and (max-width: 500px) {
-  .Bit {
-    font-size: 1.5rem;
-  }
 }
