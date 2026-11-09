@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import GameOver from './components/GameOver';
 import Victory from './components/Victory';
+import ThemeToggle from './components/ThemeToggle';
+import './App.css';
 
 const router = createBrowserRouter([
   {
@@ -23,5 +25,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ThemeToggle />
   </React.StrictMode>
 );

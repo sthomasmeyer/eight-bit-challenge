@@ -1,30 +1,28 @@
 .Timer {
-  border: 5px double #171717;
-  border-radius: 25px;
-  height: 95%;
-  width: 95%;
-  max-height: 80vh;
-  max-width: 80vw;
+  font-family: var(--font-mono);
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Rubik', sans-serif;
   margin-left: auto;
+  font-variant-numeric: tabular-nums slashed-zero;
+  transition:
+    background-color 0.35s var(--spring-ease),
+    border-color 0.35s var(--spring-ease),
+    box-shadow 0.35s var(--spring-ease);
 }
 
 .Timer time {
-  font-size: 4rem;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: var(--weight-semibold);
+  font-variation-settings: 'wght' var(--weight-semibold);
+  color: var(--fg-primary);
+  letter-spacing: -0.025em;
   margin: 0 auto;
-}
-
-@media only screen and (max-width: 500px) {
-  .Timer {
-    border: 2.5px double #171717;
-    height: 75%;
-    width: 85%;
-  }
-
-  .Timer time {
-    font-size: 1.75rem;
-  }
 }

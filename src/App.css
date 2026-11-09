@@ -1,13 +1,108 @@
+/*
+ * Design System & Typographic Engine — The Braun Atelier (OKLCH + Variable Type)
+ * ---------------------------------------------------------------------------
+ * Combines perceptual OKLCH materiality with optical typography:
+ * - Inverse law of size, tracking (letter-spacing), and leading (line-height)
+ * - Dark-mode variable weight compensation to counter retinal irradiation
+ * - OpenType disambiguation (cv02-cv04, cv11) and tabular-nums on live metrics
+ */
+:root,
+:root[data-theme='light'] {
+  /* 1. Perceptual OKLCH Surface & Ink Tokens (Braun Light) */
+  --bg-canvas: oklch(98.5% 0.004 95);
+  --bg-elevated: oklch(100% 0 0 / 0.92);
+  --bg-recessed: oklch(95% 0.007 90 / 0.85);
+  --fg-primary: oklch(20.5% 0.005 95);
+  --fg-muted: oklch(50% 0.014 85);
+  --badge-bg: oklch(20.5% 0.005 95);
+  --badge-fg: oklch(98.5% 0.004 95);
+  --border-subtle: oklch(20.5% 0.005 95 / 0.09);
+  --border-strong: oklch(20.5% 0.005 95 / 0.22);
+  --border-highlight: oklch(20.5% 0.005 95 / 0.38);
+  --shadow-card:
+    0 1px 2px oklch(20% 0.005 90 / 0.05),
+    0 10px 24px -8px oklch(20% 0.01 90 / 0.1);
+  --shadow-card-hover:
+    0 4px 10px oklch(20% 0.005 90 / 0.08),
+    0 20px 36px -10px oklch(20% 0.01 90 / 0.2);
+  --logo-filter: none;
+  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 2. Typeface Class Definitions (Swiss Instrument: Inter + JetBrains Mono) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* 3. Optical Weight Compensation (Light Mode Default) */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+}
+
+:root[data-theme='dark'] {
+  /* Perceptual OKLCH Surface & Ink Tokens (Braun Dark — Matte Basalt) */
+  --bg-canvas: oklch(16.5% 0.003 90);
+  --bg-elevated: oklch(21.5% 0.005 90 / 0.88);
+  --bg-recessed: oklch(13.8% 0.003 90 / 0.88);
+  --fg-primary: oklch(94% 0.005 95);
+  --fg-muted: oklch(65% 0.01 90);
+  --badge-bg: oklch(24.5% 0.006 90);
+  --badge-fg: oklch(94% 0.005 95);
+  --border-subtle: oklch(100% 0 0 / 0.075);
+  --border-strong: oklch(100% 0 0 / 0.15);
+  --border-highlight: oklch(82% 0.04 80 / 0.42);
+  --shadow-card:
+    0 1px 0 0 oklch(100% 0 0 / 0.07) inset,
+    0 14px 28px -10px oklch(0% 0 0 / 0.52);
+  --shadow-card-hover:
+    0 1px 0 0 oklch(100% 0 0 / 0.14) inset,
+    0 22px 42px -10px oklch(0% 0 0 / 0.7);
+  --logo-filter: invert(0.92);
+
+  /* Fight retinal irradiation by slimming variable weights slightly in Dark Mode */
+  --weight-regular: 375;
+  --weight-medium: 470;
+  --weight-semibold: 570;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--bg-canvas);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-variation-settings: 'wght' var(--weight-regular);
+  font-feature-settings:
+    'calt' 1,
+    'cv02' 1,
+    'cv03' 1,
+    'cv04' 1,
+    'cv11' 1;
+  font-optical-sizing: auto;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.4s var(--spring-ease),
+    color 0.4s var(--spring-ease);
 }
 
 .App {
-  border: 5px ridge #171717;
-  background-color: ghostwhite;
-  height: 100vh;
+  min-height: 100dvh;
   width: 100%;
-  max-width: 800px;
+  max-width: 820px;
   margin: 0 auto;
+  padding: 20px 16px 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
 }

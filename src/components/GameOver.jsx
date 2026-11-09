@@ -47,9 +47,6 @@ const GameOver = () => {
       <div className='GameOver-button'>
         <button onClick={handleClick}>play again</button>
       </div>
-      <div className='GameOver-message'>
-        <p>Perseverance is the key to victory, anon.</p>
-      </div>
       {highScore ? (
         <div className='GameOver-score-summary'>
           <h3>

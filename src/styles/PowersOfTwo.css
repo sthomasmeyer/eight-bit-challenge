@@ -1,29 +1,33 @@
 .PowersOfTwo {
-  width: 97.5%;
+  width: 100%;
   max-width: 700px;
-  margin: 0 auto;
-  margin-top: 5%;
-  margin-bottom: 5px;
+  margin: 8px auto 6px;
 }
 
 .PowersOfTwo-wrapper {
-  padding-left: 10%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
   align-items: center;
 }
 
+/* Micro Telemetry Header: Monospace + open tracking + tabular numerals */
 .Num-wrapper {
-  border: 2.5px solid ghostwhite;
-  font-family: 'Rubik', sans-serif;
-  font-size: 1.1rem;
-  color: #98c1d9;
-  width: 10%;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.35vw, 0.9rem);
+  font-weight: var(--weight-medium);
+  font-variation-settings: 'wght' var(--weight-medium);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+  width: 100%;
   text-align: center;
-  margin-top: 5px;
+  padding: 2px 0;
+  transition: color 0.3s var(--spring-ease);
 }
 
 @media only screen and (max-width: 500px) {
-  .Num-wrapper {
-    font-size: 0.75rem;
+  .PowersOfTwo-wrapper {
+    gap: 5px;
   }
 }
