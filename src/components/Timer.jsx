@@ -1,42 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Timer.css';
 
-/**
- * This component is a countdown timer that takes in a number of seconds as a prop and updates...
- * every second until it reaches zero. It employs the 'useState' and 'useEffect' hooks from React...
- * to manage state and set-up the countdown interval.
+/*
+ * Monotonic Round Countdown
+ * ---------------------------------------------------------------------------
+ * Anchors each round's deadline to performance.now() rather than chaining
+ * 1000ms timeouts so background throttling never causes clock drift or a
+ * 1-second lag at 0 before triggering expiration.
  */
-const Timer = ({ seconds, points }) => {
-  // Initialize a 'secondsRemaining' state variable, w/ an initial value based on the 'seconds' prop.
+const Timer = ({ seconds, points, onExpire }) => {
   const [secondsRemaining, setSecondsRemaining] = useState(seconds);
-  // Initialize a 'prevPoints' state variable to determine whether the user selected the correct answer.
-  const [prevPoints, setPrevPoints] = useState(0);
-  // The 'useNavigate' hook returns a function that lets you navigate programmatically.
-  const navigate = useNavigate();
+  const deadlineMsRef = useRef(performance.now() + seconds * 1000);
+  const expiredRef = useRef(false);
+  const onExpireRef = useRef(onExpire);
 
   useEffect(() => {
-    const countdown = setTimeout(() => {
-      if (secondsRemaining > 0) {
-        setSecondsRemaining(secondsRemaining - 1);
-      } else if (secondsRemaining === 0) {
-        navigate('/game-over');
+    onExpireRef.current = onExpire;
+  }, [onExpire]);
+
+  useEffect(() => {
+    deadlineMsRef.current = performance.now() + seconds * 1000;
+    expiredRef.current = false;
+    setSecondsRemaining(seconds);
+
+    const intervalId = setInterval(() => {
+      const remainingMs = deadlineMsRef.current - performance.now();
+      const nextSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+      setSecondsRemaining(nextSeconds);
+
+      if (remainingMs <= 0 && !expiredRef.current) {
+        expiredRef.current = true;
+        clearInterval(intervalId);
+        onExpireRef.current();
       }
-    }, 1000);
+    }, 100);
 
-    return () => clearTimeout(countdown);
-  }, [secondsRemaining]);
+    return () => clearInterval(intervalId);
+  }, [seconds, points]);
 
-  // Watch for changes in the `points` prop and reset the timer if the number of points increases.
-  useEffect(() => {
-    if (points > prevPoints) {
-      setSecondsRemaining(seconds);
-      setPrevPoints(points);
-    }
-  }, [points]);
+  const isUrgent = secondsRemaining > 0 && secondsRemaining <= 5;
 
   return (
-    <div className='Timer'>
+    <div
+      className='Timer'
+      data-urgent={isUrgent ? 'true' : 'false'}
+      aria-label={`${secondsRemaining} seconds remaining`}
+    >
       <time>{secondsRemaining}</time>
     </div>
   );

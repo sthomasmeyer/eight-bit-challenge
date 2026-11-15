@@ -8,12 +8,15 @@
  */
 :root,
 :root[data-theme='light'] {
+  color-scheme: light;
+
   /* 1. Perceptual OKLCH Surface & Ink Tokens (Braun Light) */
   --bg-canvas: oklch(98.5% 0.004 95);
   --bg-elevated: oklch(100% 0 0 / 0.92);
   --bg-recessed: oklch(95% 0.007 90 / 0.85);
   --fg-primary: oklch(20.5% 0.005 95);
   --fg-muted: oklch(50% 0.014 85);
+  --accent-urgent: oklch(64.5% 0.215 36);
   --badge-bg: oklch(20.5% 0.005 95);
   --badge-fg: oklch(98.5% 0.004 95);
   --border-subtle: oklch(20.5% 0.005 95 / 0.09);
@@ -39,12 +42,15 @@
 }
 
 :root[data-theme='dark'] {
+  color-scheme: dark;
+
   /* Perceptual OKLCH Surface & Ink Tokens (Braun Dark — Matte Basalt) */
   --bg-canvas: oklch(16.5% 0.003 90);
   --bg-elevated: oklch(21.5% 0.005 90 / 0.88);
   --bg-recessed: oklch(13.8% 0.003 90 / 0.88);
   --fg-primary: oklch(94% 0.005 95);
   --fg-muted: oklch(65% 0.01 90);
+  --accent-urgent: oklch(70% 0.195 38);
   --badge-bg: oklch(24.5% 0.006 90);
   --badge-fg: oklch(94% 0.005 95);
   --border-subtle: oklch(100% 0 0 / 0.075);
@@ -85,11 +91,12 @@ body {
     'cv04' 1,
     'cv11' 1;
   font-optical-sizing: auto;
+  font-kerning: normal;
+  font-synthesis: none;
   min-height: 100dvh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
   transition:
     background-color 0.4s var(--spring-ease),
     color 0.4s var(--spring-ease);
@@ -105,4 +112,119 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 12px;
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Primary Pill/Card Action Button shared across end screens */
+.ActionButton {
+  background-color: var(--badge-bg);
+  color: var(--badge-fg);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: var(--weight-medium);
+  font-variation-settings: 'wght' var(--weight-medium);
+  letter-spacing: 0.01em;
+  height: 46px;
+  width: 140px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition:
+    background-color 0.25s var(--spring-ease),
+    color 0.25s var(--spring-ease),
+    border-color 0.25s ease,
+    box-shadow 0.25s var(--spring-ease),
+    transform 0.2s var(--spring-ease);
+}
+
+.ActionButton:hover {
+  background-color: var(--fg-primary);
+  color: var(--bg-canvas);
+  border-color: var(--border-highlight);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.ActionButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.ActionButton:focus-visible {
+  outline: 2px solid var(--fg-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ActionButton {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .ActionButton:hover,
+  .ActionButton:active {
+    transform: none;
+  }
+}
+
+/* Whisper-quiet desktop keyboard legend; hidden on touch-primary devices */
+.KeyboardLegend {
+  margin: 18px auto 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: var(--weight-regular);
+  font-variation-settings: 'wght' var(--weight-regular);
+  font-feature-settings:
+    'calt' 1,
+    'case' 1,
+    'cv02' 1,
+    'cv03' 1,
+    'cv04' 1,
+    'cv11' 1;
+  letter-spacing: 0.03em;
+  color: var(--fg-muted);
+  opacity: 0.72;
+  user-select: none;
+}
+
+.KeyboardLegend kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  margin: 0 1px;
+  font-family: inherit;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: var(--fg-primary);
+  background: var(--bg-recessed);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .KeyboardLegend {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(button):focus-visible {
+    outline: 2px solid CanvasText;
+    outline-offset: 3px;
+  }
 }

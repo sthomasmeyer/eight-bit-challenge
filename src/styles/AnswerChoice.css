@@ -13,6 +13,7 @@
   border-radius: 16px;
   box-shadow: var(--shadow-card);
   cursor: pointer;
+  touch-action: manipulation;
   user-select: none;
   font-family: var(--font-sans);
   transition:
@@ -51,11 +52,19 @@
   letter-spacing: 0.04em;
   color: var(--badge-fg);
   font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings:
+    'calt' 1,
+    'case' 1,
+    'cv02' 1,
+    'cv03' 1,
+    'cv04' 1,
+    'cv11' 1;
   opacity: 0.58;
   transition: opacity 0.2s ease;
 }
 
-.AnswerChoice:hover .AnswerChoice-index {
+.AnswerChoice:hover .AnswerChoice-index,
+.AnswerChoice:focus-visible .AnswerChoice-index {
   opacity: 0.92;
 }
 
@@ -70,6 +79,20 @@
   font-variant-numeric: tabular-nums;
   font-optical-sizing: auto;
   color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .AnswerChoice {
+    transition:
+      border-color 0.22s ease,
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .AnswerChoice:hover,
+  .AnswerChoice:active {
+    transform: none;
+  }
 }
 
 @media only screen and (max-width: 500px) {

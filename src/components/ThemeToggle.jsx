@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { shouldIgnoreKeyEvent } from '../utils';
 import '../styles/ThemeToggle.css';
 
 const THEME_STORAGE_KEY = 'eight-bit-challenge-theme';
@@ -59,9 +60,23 @@ const ThemeToggle = () => {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (shouldIgnoreKeyEvent(event)) return;
+
+      if (event.key.toLowerCase() === 't') {
+        event.preventDefault();
+        toggleTheme();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleTheme]);
 
   const isDark = theme === 'dark';
 
@@ -72,7 +87,8 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       aria-pressed={isDark}
-      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      aria-keyshortcuts='t'
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode (T)`}
     >
       {isDark ? <MoonIcon /> : <SunIcon />}
       <span className='ThemeToggle-label'>{isDark ? 'Dark' : 'Light'}</span>

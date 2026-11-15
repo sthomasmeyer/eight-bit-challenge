@@ -1,62 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { shouldIgnoreKeyEvent } from '../utils';
 import '../styles/GameOver.css';
 
 const GameOver = () => {
-  // Declare and initialize the 'highScore' state variable.
-  const [highScore, setHighScore] = useState(0);
-
-  // The `useNavigate` hook returns a function that lets you navigate programmatically.
+  const [finalScore, setFinalScore] = useState(null);
+  const [highScore, setHighScore] = useState(null);
+  const headingRef = useRef(null);
   const navigate = useNavigate();
 
-  // This effect hook updates the value aligned to the 'session-high-score' key in localStorage...
-  // and assigns the appropriate value to the 'highScore' state variable.
   useEffect(() => {
-    // Retrieve the latest score from localStorage and convert it to a number.
-    const latestScore = +localStorage.getItem(
+    document.title = 'Game Over | 8-bit Challenge';
+    headingRef.current?.focus();
+
+    const rawLatest = localStorage.getItem(
       'eight-bit-challenge-current-points-tracker'
     );
-    // Retrieve the session-high score from localStorage and convert it to a number.
-    let sessionHighScore = +localStorage.getItem(
-      'eight-bit-challenge-session-high-score'
-    );
+    const latestScore = rawLatest !== null ? Number(rawLatest) : 0;
+    const rawHigh = localStorage.getItem('eight-bit-challenge-session-high-score');
+    const savedHighScore = rawHigh !== null ? Number(rawHigh) : null;
 
-    // If there is no 'session-high-score' key or its value is less than latestScore, set the value...
-    // of 'session-high-score' to be latestScore (+) update the 'highScore' state variable.
-    if (!sessionHighScore || latestScore > sessionHighScore) {
+    setFinalScore(latestScore);
+
+    if (savedHighScore === null || latestScore > savedHighScore) {
       localStorage.setItem(
         'eight-bit-challenge-session-high-score',
-        latestScore
+        String(latestScore)
       );
       setHighScore(latestScore);
     } else {
-      // Otherwise, update the 'highScore' state variable.
-      setHighScore(sessionHighScore);
+      setHighScore(savedHighScore);
     }
   }, []);
 
-  const handleClick = () => {
+  const handlePlayAgain = useCallback(() => {
     navigate('/');
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (shouldIgnoreKeyEvent(event)) return;
+
+      if (event.key.toLowerCase() === 'r') {
+        event.preventDefault();
+        handlePlayAgain();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handlePlayAgain]);
 
   return (
-    <div className='GameOver'>
+    <main className='GameOver'>
       <div className='GameOver-title'>
-        <h1>Game Over</h1>
+        <h1 ref={headingRef} tabIndex={-1}>
+          Game Over
+        </h1>
       </div>
       <div className='GameOver-button'>
-        <button onClick={handleClick}>play again</button>
+        <button
+          type='button'
+          className='ActionButton'
+          onClick={handlePlayAgain}
+          aria-keyshortcuts='r'
+        >
+          play again
+        </button>
       </div>
-      {highScore ? (
-        <div className='GameOver-score-summary'>
-          <h3>
-            Final Score:{' '}
-            {localStorage.getItem('eight-bit-challenge-current-points-tracker')}
-          </h3>
-          <h3>Local High Score: {highScore}</h3>
-        </div>
+      {finalScore !== null && highScore !== null ? (
+        <section className='GameOver-score-summary' aria-label='Score summary'>
+          <h2>Final Score: {finalScore}</h2>
+          <p className='GameOver-high-score'>Local High Score: {highScore}</p>
+        </section>
       ) : null}
-    </div>
+      <p className='KeyboardLegend' aria-hidden='true'>
+        <kbd>R</kbd> play again · <kbd>T</kbd> theme
+      </p>
+    </main>
   );
 };
 

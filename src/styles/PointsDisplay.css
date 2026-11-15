@@ -10,6 +10,13 @@
   display: flex;
   align-items: center;
   font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings:
+    'calt' 1,
+    'case' 1,
+    'cv02' 1,
+    'cv03' 1,
+    'cv04' 1,
+    'cv11' 1;
   transition:
     background-color 0.35s var(--spring-ease),
     border-color 0.35s var(--spring-ease),
