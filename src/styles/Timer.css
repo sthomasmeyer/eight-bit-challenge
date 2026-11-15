@@ -12,6 +12,13 @@
   align-items: center;
   margin-left: auto;
   font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings:
+    'calt' 1,
+    'case' 1,
+    'cv02' 1,
+    'cv03' 1,
+    'cv04' 1,
+    'cv11' 1;
   transition:
     background-color 0.35s var(--spring-ease),
     border-color 0.35s var(--spring-ease),
@@ -25,4 +32,9 @@
   color: var(--fg-primary);
   letter-spacing: -0.025em;
   margin: 0 auto;
+  transition: color 0.25s ease;
+}
+
+.Timer[data-urgent='true'] time {
+  color: var(--accent-urgent);
 }

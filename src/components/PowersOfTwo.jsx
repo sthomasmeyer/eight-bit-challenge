@@ -2,19 +2,17 @@ import React from 'react';
 import '../styles/PowersOfTwo.css';
 
 const PowersOfTwo = () => {
-  let nums = [];
-
-  for (let i = 0; i < 8; i++) {
-    nums.unshift(
-      <div className='Num-wrapper' key={`num${i}`} id={`num${i}`}>
-        2<sup>{i}</sup>
-      </div>
-    );
-  }
+  const exponents = [7, 6, 5, 4, 3, 2, 1, 0];
 
   return (
-    <div className='PowersOfTwo'>
-      <div className='PowersOfTwo-wrapper'>{nums}</div>
+    <div className='PowersOfTwo' aria-hidden='true'>
+      <div className='PowersOfTwo-wrapper'>
+        {exponents.map((exponent) => (
+          <div className='Num-wrapper' key={`num${exponent}`} id={`num${exponent}`}>
+            2<sup>{exponent}</sup>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
